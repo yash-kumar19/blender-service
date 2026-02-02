@@ -17,6 +17,10 @@ RUN apt-get update && \
     libxrender1 \
     libxext6 \
     libxi6 \
+    libxkbcommon0 \
+    libxrandr2 \
+    libxinerama1 \
+    libxcursor1 \
     && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
