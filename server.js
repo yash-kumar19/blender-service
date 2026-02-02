@@ -48,14 +48,19 @@ app.post("/convert", async (req, res) => {
         fs.writeFileSync(inputPath, buffer)
 
         console.log("Starting Blender conversion...")
+        console.log(`Command: blender -b -P convert.py -- ${inputPath} ${outputPath}`)
+
         exec(
             `blender -b -P convert.py -- ${inputPath} ${outputPath}`,
             (err, stdout, stderr) => {
+                console.log("Blender STDOUT:", stdout)
+                if (stderr) console.error("Blender STDERR:", stderr)
+
                 if (err) {
-                    console.error("Blender Error:", stderr)
+                    console.error("Blender Exec Error:", err)
                     // Cleanup on error
                     if (fs.existsSync(inputPath)) fs.unlinkSync(inputPath)
-                    return res.status(500).send("Conversion process failed")
+                    return res.status(500).send(`Conversion failed: ${stderr || err.message}`)
                 }
 
                 if (!fs.existsSync(outputPath)) {
