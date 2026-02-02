@@ -20,7 +20,7 @@ bpy.ops.wm.read_factory_settings(use_empty=True)
 
 # Import USDZ
 try:
-    bpy.ops.import_scene.usd(filepath=input_file)
+    bpy.ops.wm.usd_import(filepath=input_file)
 except Exception as e:
     print(f"Error importing USD: {e}")
     sys.exit(1)

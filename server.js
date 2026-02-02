@@ -6,7 +6,7 @@ import fetch from "node-fetch"
 const app = express()
 app.use(express.json({ limit: "50mb" }))
 
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 
 // Security Middleware
 app.use((req, res, next) => {
